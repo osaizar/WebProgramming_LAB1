@@ -11,10 +11,10 @@
       </div>
 
       <div id="formDiv">
-        <form id="loginForm">
+        <form id="loginForm" onSubmit="validateLoginForm()">
           <div>
             <label for="email">Email</label>
-            <input type="text" name="email">
+            <input type="email" name="email">
           </div>
           <div>
             <label for="password">Password</label>
@@ -23,7 +23,7 @@
           <input class="button" type="submit" value="Login">
         </form>
 
-        <form id="signupForm">
+        <form id="signupForm" onSubmit="validateSignUpForm()">
           <h2>Sign up here</h2>
           <div>
             <label for="name">First name</label>
@@ -35,7 +35,7 @@
           </div>
           <div>
             <label for="gender">Gender</label>
-            <select form="signupForm">
+            <select id="gender" form="signupForm">
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
@@ -50,15 +50,15 @@
           </div>
           <div>
             <label for="Email">Email</label>
-            <input type="text" name="email">
+            <input type="email" name="email">
           </div>
           <div>
             <label for="password">Password</label>
-            <input type="password" name="sign-pass">
+            <input type="password" name="password">
           </div>
           <div>
             <label for="Rpassword">Repeat password</label>
-            <input type="password" name="sign-repass">
+            <input type="password" name="Rpassword">
           </div>
           <input class="button" type="submit" value="Sign Up">
         </form>
