@@ -1,0 +1,52 @@
+body {
+  background-color: lightblue;
+}
+
+div{
+  margin: .4em 0;
+}
+
+div label{
+  width: 35%;
+  float: left;
+}
+
+.button{
+  position: relative;
+}
+
+#holder{
+  margin: 0 auto;
+  width: 600px;
+  height: 400px;
+}
+
+
+#formDiv{
+  float: left;
+  margin-left: 10px
+  margin-top: 100px;
+  width: 250px;
+  height: 400px;
+}
+
+#loginForm{
+  border-style: solid;
+  border-width: 1px;
+  background-color: white;
+}
+
+#signupForm{
+  border-style: solid;
+  border-width: 1px;
+  background-color: white;
+}
+
+
+#image{
+  float: left;
+  height: 400px;
+  width: 340px;
+  margin-right: 10px;
+  border-width: 1px;
+}
