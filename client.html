@@ -11,27 +11,27 @@
       </div>
 
       <div id="formDiv">
-        <form id="loginForm" onSubmit="validateLoginForm()">
+        <form id="loginForm" onSubmit="logIn()">
           <div>
             <label for="email">Email</label>
-            <input type="email" name="email">
+            <input type="email" name="email" required>
           </div>
           <div>
             <label for="password">Password</label>
-            <input type="password" name="password">
+            <input type="password" name="password" required>
           </div>
           <input class="button" type="submit" value="Login">
         </form>
 
-        <form id="signupForm" onSubmit="validateSignUpForm()">
+        <form id="signupForm" onSubmit="signUp()">
           <h2>Sign up here</h2>
           <div>
             <label for="name">First name</label>
-            <input type="text" name="name">
+            <input type="text" name="name" required>
           </div>
           <div>
             <label for="f-name">Family name</label>
-            <input type="text" name="f-name">
+            <input type="text" name="f-name" required>
           </div>
           <div>
             <label for="gender">Gender</label>
@@ -42,23 +42,22 @@
           </div>
           <div>
             <label for="city">City</label>
-            <input type="text" name="city">
+            <input type="text" name="city" required>
           </div>
           <div>
             <label for="country">Country</label>
-            <input type="text" name="country">
+            <input type="text" name="country" required>
           </div>
           <div>
             <label for="Email">Email</label>
-            <input type="email" name="email">
+            <input type="email" name="email" required>
           </div>
           <div>
             <label for="password">Password</label>
-            <input type="password" name="password">
-          </div>
+            <input id="s_password" type="password" name="password" required pattern=".{6,}" title="6 characters minimum" onchange="checkPasswords()">
           <div>
             <label for="Rpassword">Repeat password</label>
-            <input type="password" name="Rpassword">
+            <input id="s_rpassword" type="password" name="Rpassword" required onkeyup="checkPasswords()">
           </div>
           <input class="button" type="submit" value="Sign Up">
         </form>
