@@ -20,21 +20,21 @@ function logIn(){
   var email = document.forms["loginForm"]["email"].value;
   var password = document.forms["loginForm"]["password"].value;
 
-  var msg = serverstub.signIn(email, password);
+  var server_msg = serverstub.signIn(email, password);
 
-  if (msg.success){ //debug
-    alert(msg.message);
+  if (server_msg.success){ //debug
+    alert(server_msg.message);
   }else {
-    alert(msg.message);
+    alert(server_msg.message);
   }
 
-  localStorage.setItem("token", msg.data);
+  localStorage.setItem("token", server_msg.data);
 
   displayView();
 }
 
 
-function checkPasswords(){
+function checkPasswords(type){
   var password = document.getElementById("s_password");
   var rpassword = document.getElementById("s_rpassword");
 
@@ -57,20 +57,108 @@ function signUp(){
   var password = document.forms["signupForm"]["password"].value;
 
   var user = {
-    email: email,
-    password: password,
-    firstname: firstname,
-    familyname: familyname,
-    gender: gender,
-    city: city,
-    country: country
+    "email": email,
+    "password": password,
+    "firstname": firstname,
+    "familyname": familyname,
+    "gender": gender,
+    "city": city,
+    "country": country
   };
 
-  var msg = serverstub.signUp(user);
+  var server_msg = serverstub.signUp(user);
 
-  if (msg.success){ //debug
-    alert(msg.message);
+  if (server_msg.success){ //debug
+    alert(server_msg.message);
   }else {
-    alert(msg.message);
+    alert(server_msg.message);
   }
+}
+
+function openTab(tabName){
+
+  var i;
+
+  var menu = document.getElementsByClassName("menu");
+
+  for(i = 0; i < menu.length; i++){
+    menu[i].style.display = "none";
+  }
+
+  document.getElementById(tabName).style.display = "block";
+
+}
+
+function changePassword(){
+  var npassword = document.forms["changePassForm"]["new_password"].value;
+  var cpassword = document.forms["changePassForm"]["current_password"].value;
+
+  serverstub.changePassword(localStorage.getItem("token"), cpassword, npassword);
+
+  alert("password changed!"); //debug
+}
+
+function signOut(){
+  serverstub.signOut(localStorage.getItem("token"));
+  localStorage.setItem("token", "undefined");
+  displayView();
+}
+
+function renderHome(){
+  var token = localStorage.getItem("token");
+  var server_msg = serverstub.getUserDataByToken(token);
+  var data;
+
+  if (server_msg.success){
+    data = server_msg.data;
+  }else{
+    return -1; //error
+  }
+
+  alert(token+" "+data.firstname); //debug
+
+  document.getElementById("home").innerHTML = document.getElementById("home").innerHTML.replace("%NAME%", data.firstname);
+}
+
+function sendMsg(){
+  var token = localStorage.getItem("token");
+  var server_msg = serverstub.getUserDataByToken(token);
+  var data;
+
+  if (server_msg.success){
+    data = server_msg.data;
+  }else{
+    return -1; //error
+  }
+
+  var msg = document.forms["msgForm"]["message"].value;
+
+  alert(msg+" by: "+data.email); //debug
+
+  serverstub.postMessage(token, msg, data.email);
+}
+
+function reloadMsgs(){
+  var token = localStorage.getItem("token");
+  var server_msg = serverstub.getUserMessagesByToken(token);
+  var messages;
+
+  if (server_msg.success){
+    messages = server_msg.data;
+  }else{
+    return -1; //error
+  }
+
+  var msgDiv = document.getElementById("messageDiv");
+
+  while (msgDiv.firstChild) {
+    msgDiv.removeChild(msgDiv.firstChild);
+  }
+
+  for (var i = 0; i < messages.length; i++){
+    var p = document.createElement('p');
+    p.innerHTML = "<b>"+messages[i].content+"</b> by "+messages[i].writer;
+    msgDiv.appendChild(p);
+  }
+
 }

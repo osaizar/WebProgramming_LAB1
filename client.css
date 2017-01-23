@@ -11,18 +11,64 @@ div label{
   float: left;
 }
 
+ul.navbar{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+ul.dataList{
+  list-style-type: none;
+  margin: 5px;
+}
+
+
+ul.navbar li {
+  float: left;
+}
+
+ul.navbar li a {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+ul.navbar li a:hover {
+  background-color: #ddd;
+}
+
+
+ul.navbar li a:focus, .active {
+  background-color: #ccc;
+}
+
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+
 .button{
   position: relative;
 }
 
-#holder{
+.holder{
   margin: 0 auto;
   width: 600px;
   height: 400px;
 }
 
-
-#formDiv{
+.rightSide{
   float: left;
   margin-left: 10px
   margin-top: 100px;
@@ -30,23 +76,25 @@ div label{
   height: 400px;
 }
 
-#loginForm{
-  border-style: solid;
-  border-width: 1px;
-  background-color: white;
-}
-
-#signupForm{
-  border-style: solid;
-  border-width: 1px;
-  background-color: white;
-}
-
-
-#image{
+.leftSide{
   float: left;
   height: 400px;
   width: 340px;
   margin-right: 10px;
   border-width: 1px;
+}
+
+#loginForm, #userData, #signupForm{
+  border-style: solid;
+  border-width: 1px;
+  background-color: white;
+}
+
+#userData{
+  background-color: #73F;
+  margin-top: 10px;
+}
+
+#userData h3{
+  margin: 2px;
 }
