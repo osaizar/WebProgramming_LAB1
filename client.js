@@ -11,7 +11,7 @@ displayView = function(){
  document.getElementById("innerDiv").innerHTML = document.getElementById(viewId).innerHTML;
  if (viewId == profile){
    bindFunctionsProfile();
-   openTab("home")
+   openTab("menu","home")
  }
  else if (viewId == welcome){
    bindFunctionsWelcome();
@@ -81,11 +81,11 @@ function signUp(){
   }
 }
 
-function openTab(tabName){
+function openTab(tabType, tabName){
 
   var i;
 
-  var menu = document.getElementsByClassName("menu");
+  var menu = document.getElementsByClassName(tabType);
 
   for(i = 0; i < menu.length; i++){
     menu[i].style.display = "none";
@@ -96,21 +96,6 @@ function openTab(tabName){
   if(tabName == "home"){
     renderHome();
   }
-}
-
-function openBrowseTab(tabName){
-
-  alert(tabName);
-
-  var i;
-
-  var menu = document.getElementsByClassName("browsetab");
-
-  for(i = 0; i < menu.length; i++){
-    menu[i].style.display = "none";
-  }
-
-  document.getElementById(tabName).style.display = "block";
 }
 
 function changePassword(){
@@ -148,8 +133,21 @@ function renderHome(){
   replaceHTML("userData", "%CITY%", data.city);
   replaceHTML("userData", "%EMAIL%", data.email);
 
+  reloadUserMsgs();
+}
+
+function renderUserTab(userData){
+
+  replaceHTML("otherUserData", "%NAME%", userData.firstname);
+  replaceHTML("otherUserData", "%FNAME%", userData.familyname);
+  replaceHTML("otherUserData", "%GENDER%", userData.gender);
+  replaceHTML("otherUserData", "%COUNTRY%", userData.country);
+  replaceHTML("otherUserData", "%CITY%", userData.city);
+  replaceHTML("otherUserData", "%EMAIL%", userData.email);
+
   reloadMsgs();
 }
+
 
 function replaceHTML(id, search, replace){ //find "search" on id an repalace with replace
   document.getElementById(id).innerHTML = document.getElementById(id).innerHTML.replace(search, replace);
@@ -168,18 +166,54 @@ function sendMsg(){
 
   var msg = document.forms["msgForm"]["message"].value;
 
-  alert(msg+" by: "+data.email); //debug
-
   serverstub.postMessage(token, msg, data.email);
+
+  reloadUserMsgs();
+
+  return false;
+}
+
+function sendMsgTo(){
+  var token = localStorage.getItem("token");
+  var email = document.forms["userSearchForm"]["email"].value;
+  var msg = document.forms["msgToForm"]["message"].value;
+
+  serverstub.postMessage(token, msg, email);
 
   reloadMsgs();
 
   return false;
 }
 
-function reloadMsgs(){
+function reloadUserMsgs(){
   var token = localStorage.getItem("token");
   var server_msg = serverstub.getUserMessagesByToken(token);
+  var messages;
+
+  if (server_msg.success){
+    messages = server_msg.data;
+  }else{
+    return -1; //error
+  }
+
+  var msgDiv = document.getElementById("userMessageDiv");
+
+  while (msgDiv.firstChild) {
+    msgDiv.removeChild(msgDiv.firstChild);
+  }
+
+  for (var i = 0; i < messages.length; i++){
+    var p = document.createElement('p');
+    p.innerHTML = "<b>"+messages[i].content+"</b> by "+messages[i].writer;
+    msgDiv.appendChild(p);
+  }
+
+}
+
+function reloadMsgs(){
+  var token = localStorage.getItem("token");
+  var email = document.forms["userSearchForm"]["email"].value;
+  var server_msg = serverstub.getUserMessagesByEmail(token, email);
   var messages;
 
   if (server_msg.success){
@@ -217,21 +251,14 @@ function searchUser(){
     return -1; //error
   }
 
-  openBrowseTab("user");
+  openTab("browsetab","user");
   renderUserTab(userData);
 
   return false;
 }
 
-
-function renderUserTab(userData){
-
-  replaceHTML("otherUserData", "%NAME%", userData.firstname);
-  replaceHTML("otherUserData", "%FNAME%", userData.familyname);
-  replaceHTML("otherUserData", "%GENDER%", userData.gender);
-  replaceHTML("otherUserData", "%COUNTRY%", userData.country);
-  replaceHTML("otherUserData", "%CITY%", userData.city);
-  replaceHTML("otherUserData", "%EMAIL%", userData.email);
+function back(){
+  openTab("browsetab","search");
 }
 
 function bindFunctionsWelcome(){
@@ -242,17 +269,17 @@ function bindFunctionsWelcome(){
 }
 
 function bindFunctionsProfile(){
-  document.getElementById("navHome").onclick = function() { openTab("home");};
-  document.getElementById("navBrowse").onclick = function() { openTab("browse");};
-  document.getElementById("navAccount").onclick = function() { openTab("account");};
+  document.getElementById("navHome").onclick = function() { openTab("menu","home");};
+  document.getElementById("navBrowse").onclick = function() { openTab("menu","browse");};
+  document.getElementById("navAccount").onclick = function() { openTab("menu","account");};
 
-  document.getElementById("userMsgReloadButton").onclick = reloadMsgs;
+  document.getElementById("userMsgReloadButton").onclick = reloadUserMsgs;
   document.getElementById("logout").onclick = signOut;
-  document.getElementById("back").onclick = function() {alert("back!");};
-  document.getElementById("msgReloadButton").onclick = function() {alert("back!");};
+  document.getElementById("back").onclick = back;
+  document.getElementById("msgReloadButton").onclick = reloadMsgs;
 
   document.getElementById("msgForm").onsubmit = sendMsg;
-  //document.getElementById("msgToForm").onsubmit = sendMsgTo;
+  document.getElementById("msgToForm").onsubmit = sendMsgTo;
   document.getElementById("userSearchForm").onsubmit = searchUser;
   document.getElementById("changePassForm").onsubmit = changePassword;
 
