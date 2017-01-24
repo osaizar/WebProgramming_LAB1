@@ -1,11 +1,11 @@
-//Costant declaration
+//Costant declarations
 const WELCOME = "welcomeview";
 const PROFILE = "profileview";
 
 
 displayView = function(){
   var viewId;
-  if (localStorage.getItem("token") == "undefined"){
+  if (localStorage.getItem("token") == "undefined" || localStorage.getItem("token") == null){
     viewId = WELCOME;
   }else{
     viewId = PROFILE;
