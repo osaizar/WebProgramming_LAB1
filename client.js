@@ -1,28 +1,33 @@
-var welcome = "welcomeview";
-var profile = "profileview";
+//Costant declaration
+const WELCOME = "welcomeview";
+const PROFILE = "profileview";
+
 
 displayView = function(){
- var viewId;
- if (localStorage.getItem("token") == "undefined"){
-   viewId = welcome;
- }else{
-   viewId = profile;
- }
- document.getElementById("innerDiv").innerHTML = document.getElementById(viewId).innerHTML;
- if (viewId == profile){
-   bindFunctionsProfile();
-   openTab("menu","home")
- }
- else if (viewId == welcome){
-   bindFunctionsWelcome();
- }
+  var viewId;
+  if (localStorage.getItem("token") == "undefined"){
+    viewId = WELCOME;
+  }else{
+    viewId = PROFILE;
+  }
+  document.getElementById("innerDiv").innerHTML = document.getElementById(viewId).innerHTML;
+  if (viewId == PROFILE){
+    bindFunctionsProfile();
+    openTab("menu","home")
+  }
+  else if (viewId == WELCOME){
+    bindFunctionsWelcome();
+  }
 };
+
 
 window.onload = function(){
   displayView();
 };
 
+
 function logIn(){
+
   var email = document.forms["loginForm"]["email"].value;
   var password = document.forms["loginForm"]["password"].value;
 
@@ -41,6 +46,7 @@ function logIn(){
 
 
 function checkPasswords(type){
+
   var password = document.getElementById("s_password");
   var rpassword = document.getElementById("s_rpassword");
 
@@ -50,6 +56,7 @@ function checkPasswords(type){
     rpassword.setCustomValidity('');
   }
 }
+
 
 function signUp(){
 
@@ -81,6 +88,14 @@ function signUp(){
   }
 }
 
+
+function signOut(){
+
+  serverstub.signOut(localStorage.getItem("token"));
+  localStorage.setItem("token", "undefined");
+  displayView();
+}
+
 function openTab(tabType, tabName){
 
   var i;
@@ -98,7 +113,9 @@ function openTab(tabType, tabName){
   }
 }
 
+
 function changePassword(){
+
   var npassword = document.forms["changePassForm"]["new_password"].value;
   var cpassword = document.forms["changePassForm"]["current_password"].value;
 
@@ -109,13 +126,9 @@ function changePassword(){
   return false;
 }
 
-function signOut(){
-  serverstub.signOut(localStorage.getItem("token"));
-  localStorage.setItem("token", "undefined");
-  displayView();
-}
 
 function renderHome(){
+
   var token = localStorage.getItem("token");
   var server_msg = serverstub.getUserDataByToken(token);
   var data;
@@ -136,24 +149,9 @@ function renderHome(){
   reloadUserMsgs();
 }
 
-function renderUserTab(userData){
-
-  replaceHTML("otherUserData", "%NAME%", userData.firstname);
-  replaceHTML("otherUserData", "%FNAME%", userData.familyname);
-  replaceHTML("otherUserData", "%GENDER%", userData.gender);
-  replaceHTML("otherUserData", "%COUNTRY%", userData.country);
-  replaceHTML("otherUserData", "%CITY%", userData.city);
-  replaceHTML("otherUserData", "%EMAIL%", userData.email);
-
-  reloadMsgs();
-}
-
-
-function replaceHTML(id, search, replace){ //find "search" on id an repalace with replace
-  document.getElementById(id).innerHTML = document.getElementById(id).innerHTML.replace(search, replace);
-}
 
 function sendMsg(){
+
   var token = localStorage.getItem("token");
   var server_msg = serverstub.getUserDataByToken(token);
   var data;
@@ -173,7 +171,9 @@ function sendMsg(){
   return false;
 }
 
+
 function sendMsgTo(){
+
   var token = localStorage.getItem("token");
   var email = document.forms["userSearchForm"]["email"].value;
   var msg = document.forms["msgToForm"]["message"].value;
@@ -185,7 +185,9 @@ function sendMsgTo(){
   return false;
 }
 
+
 function reloadUserMsgs(){
+
   var token = localStorage.getItem("token");
   var server_msg = serverstub.getUserMessagesByToken(token);
   var messages;
@@ -210,7 +212,9 @@ function reloadUserMsgs(){
 
 }
 
+
 function reloadMsgs(){
+
   var token = localStorage.getItem("token");
   var email = document.forms["userSearchForm"]["email"].value;
   var server_msg = serverstub.getUserMessagesByEmail(token, email);
@@ -236,6 +240,7 @@ function reloadMsgs(){
 
 }
 
+
 function searchUser(){
 
   var token = localStorage.getItem("token");
@@ -251,24 +256,48 @@ function searchUser(){
     return -1; //error
   }
 
-  openTab("browsetab","user");
   renderUserTab(userData);
+  openTab("browsetab","user");
 
   return false;
 }
 
+
+function renderUserTab(userData){
+
+  replaceHTML("otherUserData", "%NAME%", userData.firstname);
+  replaceHTML("otherUserData", "%FNAME%", userData.familyname);
+  replaceHTML("otherUserData", "%GENDER%", userData.gender);
+  replaceHTML("otherUserData", "%COUNTRY%", userData.country);
+  replaceHTML("otherUserData", "%CITY%", userData.city);
+  replaceHTML("otherUserData", "%EMAIL%", userData.email);
+
+  reloadMsgs();
+}
+
+
 function back(){
+
   openTab("browsetab","search");
 }
 
+function replaceHTML(id, search, replace){ //find "search" on id an repalace with replace
+
+  document.getElementById(id).innerHTML = document.getElementById(id).innerHTML.replace(search, replace);
+}
+
+
 function bindFunctionsWelcome(){
+
   document.getElementById("loginForm").onsubmit = logIn;
   document.getElementById("signupForm").onsubmit = signUp;
 
   document.getElementById("s_rpassword").onkeyup = checkPasswords;
 }
 
+
 function bindFunctionsProfile(){
+
   document.getElementById("navHome").onclick = function() { openTab("menu","home");};
   document.getElementById("navBrowse").onclick = function() { openTab("menu","browse");};
   document.getElementById("navAccount").onclick = function() { openTab("menu","account");};
