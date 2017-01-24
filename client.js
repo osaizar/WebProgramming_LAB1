@@ -117,7 +117,16 @@ function renderHome(){
 
   alert(token+" "+data.firstname); //debug
 
-  document.getElementById("home").innerHTML = document.getElementById("home").innerHTML.replace("%NAME%", data.firstname);
+  replaceHTML("home", "%NAME%", data.firstname);
+  replaceHTML("home", "%FNAME%", data.familyname);
+  replaceHTML("home", "%GENDER%", data.gender);
+  replaceHTML("home", "%COUNTRY%", data.country);
+  replaceHTML("home", "%CITY%", data.city);
+  replaceHTML("home", "%EMAIL%", data.email);
+}
+
+function replaceHTML(id, search, replace){ //find "search" on id an repalace with replace
+  document.getElementById(id).innerHTML = document.getElementById(id).innerHTML.replace(search, replace);
 }
 
 function sendMsg(){
