@@ -9,12 +9,18 @@ displayView = function(){
    viewId = profile;
  }
  document.getElementById("innerDiv").innerHTML = document.getElementById(viewId).innerHTML;
+ if (viewId == profile){
+   bindFunctionsProfile();
+   openTab("home")
+ }
+ else if (viewId == welcome){
+   bindFunctionsWelcome();
+ }
 };
 
 window.onload = function(){
- displayView();
+  displayView();
 };
-
 
 function logIn(){
   var email = document.forms["loginForm"]["email"].value;
@@ -87,6 +93,24 @@ function openTab(tabName){
 
   document.getElementById(tabName).style.display = "block";
 
+  if(tabName == "home"){
+    renderHome();
+  }
+}
+
+function openBrowseTab(tabName){
+
+  alert(tabName);
+
+  var i;
+
+  var menu = document.getElementsByClassName("browsetab");
+
+  for(i = 0; i < menu.length; i++){
+    menu[i].style.display = "none";
+  }
+
+  document.getElementById(tabName).style.display = "block";
 }
 
 function changePassword(){
@@ -96,6 +120,8 @@ function changePassword(){
   serverstub.changePassword(localStorage.getItem("token"), cpassword, npassword);
 
   alert("password changed!"); //debug
+
+  return false;
 }
 
 function signOut(){
@@ -115,14 +141,14 @@ function renderHome(){
     return -1; //error
   }
 
-  alert(token+" "+data.firstname); //debug
+  replaceHTML("userData", "%NAME%", data.firstname);
+  replaceHTML("userData", "%FNAME%", data.familyname);
+  replaceHTML("userData", "%GENDER%", data.gender);
+  replaceHTML("userData", "%COUNTRY%", data.country);
+  replaceHTML("userData", "%CITY%", data.city);
+  replaceHTML("userData", "%EMAIL%", data.email);
 
-  replaceHTML("home", "%NAME%", data.firstname);
-  replaceHTML("home", "%FNAME%", data.familyname);
-  replaceHTML("home", "%GENDER%", data.gender);
-  replaceHTML("home", "%COUNTRY%", data.country);
-  replaceHTML("home", "%CITY%", data.city);
-  replaceHTML("home", "%EMAIL%", data.email);
+  reloadMsgs();
 }
 
 function replaceHTML(id, search, replace){ //find "search" on id an repalace with replace
@@ -145,6 +171,10 @@ function sendMsg(){
   alert(msg+" by: "+data.email); //debug
 
   serverstub.postMessage(token, msg, data.email);
+
+  reloadMsgs();
+
+  return false;
 }
 
 function reloadMsgs(){
@@ -170,4 +200,61 @@ function reloadMsgs(){
     msgDiv.appendChild(p);
   }
 
+}
+
+function searchUser(){
+
+  var token = localStorage.getItem("token");
+  var email = document.forms["userSearchForm"]["email"].value;
+  var server_msg = serverstub.getUserDataByEmail(token, email);
+  var userData;
+
+
+  if (server_msg.success){
+    userData = server_msg.data;
+  }else{
+    alert(server_msg.message); //debug
+    return -1; //error
+  }
+
+  openBrowseTab("user");
+  renderUserTab(userData);
+
+  return false;
+}
+
+
+function renderUserTab(userData){
+
+  replaceHTML("otherUserData", "%NAME%", userData.firstname);
+  replaceHTML("otherUserData", "%FNAME%", userData.familyname);
+  replaceHTML("otherUserData", "%GENDER%", userData.gender);
+  replaceHTML("otherUserData", "%COUNTRY%", userData.country);
+  replaceHTML("otherUserData", "%CITY%", userData.city);
+  replaceHTML("otherUserData", "%EMAIL%", userData.email);
+}
+
+function bindFunctionsWelcome(){
+  document.getElementById("loginForm").onsubmit = logIn;
+  document.getElementById("signupForm").onsubmit = signUp;
+
+  document.getElementById("s_rpassword").onkeyup = checkPasswords;
+}
+
+function bindFunctionsProfile(){
+  document.getElementById("navHome").onclick = function() { openTab("home");};
+  document.getElementById("navBrowse").onclick = function() { openTab("browse");};
+  document.getElementById("navAccount").onclick = function() { openTab("account");};
+
+  document.getElementById("userMsgReloadButton").onclick = reloadMsgs;
+  document.getElementById("logout").onclick = signOut;
+  document.getElementById("back").onclick = function() {alert("back!");};
+  document.getElementById("msgReloadButton").onclick = function() {alert("back!");};
+
+  document.getElementById("msgForm").onsubmit = sendMsg;
+  //document.getElementById("msgToForm").onsubmit = sendMsgTo;
+  document.getElementById("userSearchForm").onsubmit = searchUser;
+  document.getElementById("changePassForm").onsubmit = changePassword;
+
+  document.getElementById("s_rpassword").onkeyup = checkPasswords;
 }

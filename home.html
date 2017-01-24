@@ -8,7 +8,7 @@
   <li> <a href="javascript:void(0)" onclick="openTab('account')">Account</a></li>
 </ul>
 
-<div id="home" class="menu" style="display:block">
+<div id="home" class="menu" style="display:none">
 
   <div class="holder">
 
@@ -45,8 +45,55 @@
 
 </div>
 
-<div id="browse" class="menu" style="display:none">
-<h1> This is browse! </h1>
+<div id="browse" class="menu" style="display:block">
+  <div id="user" class="browsetab" style="display:none">
+    <div class="holder">
+
+      <div class="leftSide">
+
+        <div id="userData">
+          <ul>
+            <li>Name: %NAME%</li>
+            <li>Family Name: %FNAME%</li>
+            <li>Country: %COUNTRY%</li>
+          </ul>
+        </div>
+
+        <form id="msgForm" onSubmit="alert("Send!")">
+          <div>
+            <label for="message">Message</label>
+            <input type="text" name="message" required>
+          </div>
+          <input class="button" type="submit" value="Send message">
+        </form>
+      </div>
+
+      <div id="rightSide">
+        <input class="button" type="submit" value="Reload Messages" onclick="alert('reload')">
+        <div class="messages">
+          Msg1
+          Msg2
+          Msg2
+        </div>
+      </div>
+
+
+    </div>
+    <script> renderHome(); </script>
+  </div>
+
+  <div id="search" class="browsetab" style="display:block">
+    <div class="holder">
+      <form id="userSearchForm" onSubmit="searchUser()">
+        <div>
+          <label for="message">Enter Email</label>
+          <input type="text" name="email" required>
+        </div>
+        <input class="button" type="submit" value="Search user">
+      </form>
+    </div>
+  </div>
+
 </div>
 
 <div id="account" class="menu" style="display:none">

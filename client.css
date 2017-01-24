@@ -84,17 +84,19 @@ ul.navbar li a:focus, .active {
   border-width: 1px;
 }
 
-#loginForm, #userData, #signupForm{
+.userData{
+  background-color: #73F;
+  margin-top: 10px;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.userData h3{
+  margin: 2px;
+}
+
+#loginForm, #signupForm{
   border-style: solid;
   border-width: 1px;
   background-color: white;
-}
-
-#userData{
-  background-color: #73F;
-  margin-top: 10px;
-}
-
-#userData h3{
-  margin: 2px;
 }

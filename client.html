@@ -11,7 +11,7 @@
       </div>
 
       <div class="rightSide">
-        <form id="loginForm" onSubmit="logIn()">
+        <form id="loginForm">
           <div>
             <label for="email">Email</label>
             <input type="email" name="email" required>
@@ -20,10 +20,10 @@
             <label for="password">Password</label>
             <input type="password" name="password" required>
           </div>
-          <input class="button" type="submit" value="Login">
+          <input id="Login" class="button" type="submit" value="Login">
         </form>
 
-        <form id="signupForm" onSubmit="signUp()">
+        <form id="signupForm">
           <h2>Sign up here</h2>
           <div>
             <label for="name">First name</label>
@@ -57,7 +57,7 @@
             <input id="s_password" type="password" name="password" required pattern=".{6,}" title="6 characters minimum" onchange="checkPasswords()">
           <div>
             <label for="Rpassword">Repeat password</label>
-            <input id="s_rpassword" type="password" name="Rpassword" required onkeyup="checkPasswords()">
+            <input id="s_rpassword" type="password" name="Rpassword" required>
           </div>
           <input class="button" type="submit" value="Sign Up">
         </form>
@@ -68,17 +68,17 @@
   <script src="" type="text/view" id="profileview">
 
     <ul class="navbar">
-      <li> <a href="javascript:void(0)" onclick="openTab('home')">Home</a></li>
-      <li> <a href="javascript:void(0)" onclick="openTab('browse')">Browse</a></li>
-      <li> <a href="javascript:void(0)" onclick="openTab('account')">Account</a></li>
+      <li> <a id="navHome" href="javascript:void(0)">Home</a></li>
+      <li> <a id="navBrowse" href="javascript:void(0)">Browse</a></li>
+      <li> <a id="navAccount" href="javascript:void(0)">Account</a></li>
     </ul>
 
-    <div id="home" class="menu" style="display:block" onload="">
+    <div id="home" class="menu" style="display:block">
 
       <div class="holder">
 
         <div class="leftSide">
-          <div id="userData">
+          <div id="userData" class="userData">
           <h3>User Information:</h3>
             <ul class="dataList">
               <li>Name: %NAME%</li>
@@ -90,7 +90,7 @@
             </ul>
           </div>
 
-          <form id="msgForm" onSubmit="sendMsg()">
+          <form id="msgForm">
             <div>
               <label for="message">Message</label>
               <input type="text" name="message" required>
@@ -100,7 +100,7 @@
         </div>
 
         <div id="rightSide">
-          <input class="button" type="submit" value="Reload Messages" onclick="reloadMsgs()">
+          <input id="userMsgReloadButton" class="button" type="submit" value="Reload Messages">
           <div id="messageDiv">
           </div>
         </div>
@@ -108,12 +108,58 @@
     </div>
 
     <div id="browse" class="menu" style="display:none">
-    <h1> This is browse! </h1>
+    <div id="user" class="browsetab" style="display:none">
+      <div class="holder">
+
+        <div class="leftSide">
+          <div id="otherUserData" class="userData">
+            <h3>User Information:</h3>
+              <ul class="dataList">
+                <li>Name: %NAME%</li>
+                <li>Family Name: %FNAME%</li>
+                <li>Country: %COUNTRY%</li>
+                <li>City: %CITY%</li>
+                <li>Gender: %GENDER%</li>
+                <li>Email: %EMAIL%</li>
+              </ul>
+          </div>
+
+            <form id="msgToForm">
+              <div>
+                <label for="message">Message</label>
+                <input type="text" name="message" required>
+              </div>
+              <input class="button" type="submit" value="Send message">
+            </form>
+            <a id="back" href="javascript:void(0)">Back</a>
+        </div>
+
+        <div id="rightSide">
+          <input id="msgReloadButton" class="button" type="submit" value="Reload Messages">
+          <div id="messageDiv">
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div id="search" class="browsetab" style="display:block">
+      <div class="holder">
+        <form id="userSearchForm">
+          <div>
+            <label for="message">Enter Email</label>
+            <input type="text" name="email" required>
+          </div>
+          <input class="button" type="submit" value="Search user">
+        </form>
+      </div>
+    </div>
     </div>
 
     <div id="account" class="menu" style="display:none">
       <div class="holder">
-        <form id="changePassForm" onSubmit="changePassword()">
+        <form id="changePassForm">
           <div>
             <label for="current_password">Current Password</label>
             <input type="password" name="current_password" required>
@@ -124,12 +170,12 @@
           </div>
           <div>
             <label for="rnew_password">Repeat New Password</label>
-            <input id="s_rpassword" type="password" name="rnew_password" required onkeyup="checkPasswords()">
+            <input id="s_rpassword" type="password" name="rnew_password" required>
           </div>
           <input class="button" type="submit" value="Change Password">
         </form>
 
-      <a href="javascript:void(0)" onclick="signOut()">Logout</a>
+      <a id="logout" href="javascript:void(0)">Logout</a>
       </div>
     </div>
   </script>
