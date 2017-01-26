@@ -131,20 +131,20 @@ function renderHome(){
 
   var token = localStorage.getItem("token");
   var server_msg = serverstub.getUserDataByToken(token);
-  var data;
+  var userData;
 
   if (server_msg.success){
-    data = server_msg.data;
+    userData = server_msg.data;
   }else{
     return -1; //error
   }
 
-  replaceHTML("userData", "%NAME%", data.firstname);
-  replaceHTML("userData", "%FNAME%", data.familyname);
-  replaceHTML("userData", "%GENDER%", data.gender);
-  replaceHTML("userData", "%COUNTRY%", data.country);
-  replaceHTML("userData", "%CITY%", data.city);
-  replaceHTML("userData", "%EMAIL%", data.email);
+  document.getElementById("nameField").innerHTML = userData.firstname;
+  document.getElementById("fNameField").innerHTML = userData.familyname;
+  document.getElementById("genderField").innerHTML = userData.gender;
+  document.getElementById("countryField").innerHTML = userData.country;
+  document.getElementById("cityField").innerHTML = userData.city;
+  document.getElementById("emailField").innerHTML = userData.email;
 
   reloadUserMsgs();
 }
@@ -265,12 +265,12 @@ function searchUser(){
 
 function renderUserTab(userData){
 
-  replaceHTML("otherUserData", "%NAME%", userData.firstname);
-  replaceHTML("otherUserData", "%FNAME%", userData.familyname);
-  replaceHTML("otherUserData", "%GENDER%", userData.gender);
-  replaceHTML("otherUserData", "%COUNTRY%", userData.country);
-  replaceHTML("otherUserData", "%CITY%", userData.city);
-  replaceHTML("otherUserData", "%EMAIL%", userData.email);
+  document.getElementById("othNameField").innerHTML = userData.firstname;
+  document.getElementById("othFNameField").innerHTML = userData.familyname;
+  document.getElementById("othCountryField").innerHTML = userData.gender;
+  document.getElementById("othCityField").innerHTML = userData.country;
+  document.getElementById("othGenderField").innerHTML = userData.city;
+  document.getElementById("othEmailField").innerHTML = userData.email;
 
   reloadMsgs();
 }
@@ -279,11 +279,6 @@ function renderUserTab(userData){
 function back(){
 
   openTab("browsetab","search");
-}
-
-function replaceHTML(id, search, replace){ //find "search" on id an repalace with replace
-
-  document.getElementById(id).innerHTML = document.getElementById(id).innerHTML.replace(search, replace);
 }
 
 
