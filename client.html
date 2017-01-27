@@ -68,9 +68,9 @@
   <script src="" type="text/view" id="profileview">
 
     <ul class="navbar">
-      <li> <a id="navHome" href="javascript:void(0)">Home</a></li>
-      <li> <a id="navBrowse" href="javascript:void(0)">Browse</a></li>
-      <li> <a id="navAccount" href="javascript:void(0)">Account</a></li>
+      <li> <a  class = "tabLink active" id="navHome" href="javascript:void(0)">Home</a></li>
+      <li> <a  class = "tabLink" id="navBrowse" href="javascript:void(0)">Browse</a></li>
+      <li> <a  class = "tabLink" id="navAccount" href="javascript:void(0)">Account</a></li>
     </ul>
 
     <div id="home" class="menu" style="display:block">
@@ -93,7 +93,7 @@
           <form id="msgForm">
             <div>
               <label for="message">Message</label>
-              <input type="text" name="message" required>
+              <input type="text" name="message" id = "msgToMe" required>
             </div>
             <input class="button" type="submit" value="Send message">
           </form>
@@ -127,7 +127,7 @@
             <form id="msgToForm">
               <div>
                 <label for="message">Message</label>
-                <input type="text" name="message" required>
+                <input type="text" name="message" id = "msgTo" required>
               </div>
               <input class="button" type="submit" value="Send message">
             </form>

@@ -99,18 +99,36 @@ function signOut(){
 function openTab(tabType, tabName){
 
   var i;
-
+  var tabId;
   var menu = document.getElementsByClassName(tabType);
+  //var tabLinks = document.getElementsByClassName("tabLink");
+
+  if(tabName == "home"){
+    tabId = "navHome";
+  }
+  if(tabName == "browse"){
+    tabId = "navBrowse";
+  }
+  if(tabName == "account"){
+    tabId = "navAccount";
+  }
 
   for(i = 0; i < menu.length; i++){
     menu[i].style.display = "none";
   }
 
+  /*for (i = 0; i < menu.length; i++) {
+      tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+  }*/
+
+  //document.getElementById(tabId).className += " active";
   document.getElementById(tabName).style.display = "block";
+
 
   if(tabName == "home"){
     renderHome();
   }
+
 }
 
 
@@ -164,9 +182,13 @@ function sendMsg(){
 
   var msg = document.forms["msgForm"]["message"].value;
 
+  document.forms["msgForm"]["message"].value = "";
+
   serverstub.postMessage(token, msg, data.email);
 
   reloadUserMsgs();
+
+  document.getElementById("msgToMe").value = "";
 
   return false;
 }
@@ -181,6 +203,8 @@ function sendMsgTo(){
   serverstub.postMessage(token, msg, email);
 
   reloadMsgs();
+
+  document.getElementById("msgTo").value = "";
 
   return false;
 }
@@ -277,7 +301,6 @@ function renderUserTab(userData){
 
 
 function back(){
-
   openTab("browsetab","search");
 }
 
