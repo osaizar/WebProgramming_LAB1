@@ -58,7 +58,7 @@ ul.navbar li a:focus, {
 }
 
 .active{
-  background-color: red;
+  background-color: #ddd;
 }
 
 

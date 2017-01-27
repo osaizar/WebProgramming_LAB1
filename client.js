@@ -101,27 +101,31 @@ function openTab(tabType, tabName){
   var i;
   var tabId;
   var menu = document.getElementsByClassName(tabType);
-  //var tabLinks = document.getElementsByClassName("tabLink");
+  var tabLinks = document.getElementsByClassName("tabLink");
 
-  if(tabName == "home"){
-    tabId = "navHome";
-  }
-  if(tabName == "browse"){
-    tabId = "navBrowse";
-  }
-  if(tabName == "account"){
-    tabId = "navAccount";
-  }
+  if(tabType == "menu"){
+    if(tabName == "home"){
+      tabId = "navHome";
+    }
+    if(tabName == "browse"){
+      tabId = "navBrowse";
+    }
+    if(tabName == "account"){
+      tabId = "navAccount";
+    }
+
+    for (i = 0; i < menu.length; i++) {
+        tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+    }
+
+    document.getElementById(tabId).className += " active";
+    }
+
 
   for(i = 0; i < menu.length; i++){
     menu[i].style.display = "none";
   }
 
-  /*for (i = 0; i < menu.length; i++) {
-      tabLinks[i].className = tabLinks[i].className.replace(" active", "");
-  }*/
-
-  //document.getElementById(tabId).className += " active";
   document.getElementById(tabName).style.display = "block";
 
 
