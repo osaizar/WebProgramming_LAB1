@@ -23,6 +23,10 @@
           <input id="Login" class="button" type="submit" value="Login">
         </form>
 
+        <div id = "logInError" class = "errorField" style = "display:none">
+          <span id = "messageLogIn"> <span>
+        </div>
+
         <form id="signupForm">
           <h2>Sign up here</h2>
           <div>
@@ -61,6 +65,9 @@
           </div>
           <input class="button" type="submit" value="Sign Up">
         </form>
+        <div id = "signUpError" class = "errorField" style = "display:none">
+          <span id = "messageSignUp"> <span>
+        </div>
       </div>
     </div>
   </div>
@@ -153,6 +160,9 @@
           </div>
           <input class="button" type="submit" value="Search user">
         </form>
+        <div id = "searchError" class = "errorField" style = "display:none">
+          <span id = "messageSearch"> <span>
+        </div>
       </div>
     </div>
     </div>
@@ -174,6 +184,12 @@
           </div>
           <input class="button" type="submit" value="Change Password">
         </form>
+        <div id = "chPasswordError" class = "errorField" style = "display:none">
+          <span id = "messageChPassword"> <span>
+        </div>
+        <div id = "chPasswordSuccess" class = "successField" style = "display:none">
+          <span id = "messageChPasswordS"> <span>
+        </div>
 
       <a id="logout" href="javascript:void(0)">Logout</a>
       </div>

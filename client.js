@@ -33,15 +33,27 @@ function logIn(){
 
   var server_msg = serverstub.signIn(email, password);
 
-  if (server_msg.success){ //debug
-    alert(server_msg.message);
-  }else {
-    alert(server_msg.message);
+  if (!server_msg.success){ //debug
+    showLogInError(server_msg.message);
+    //alert("contraseña incorrecta");
+    return false;
+  }
+  else{
+    localStorage.setItem("token", server_msg.data);
+    displayView();
+    return true;
   }
 
-  localStorage.setItem("token", server_msg.data);
+}
 
-  displayView();
+function showLogInError(message){
+  document.getElementById("messageLogIn").innerHTML = message;
+  document.getElementById("logInError").style.display = "block";
+}
+
+function showSignUpError(message){
+  document.getElementById("messageSignUp").innerHTML = message;
+  document.getElementById("logInError").style.display = "block";
 }
 
 
@@ -81,10 +93,10 @@ function signUp(){
 
   var server_msg = serverstub.signUp(user);
 
-  if (server_msg.success){ //debug
-    alert(server_msg.message);
-  }else {
-    alert(server_msg.message);
+  if (!server_msg.success){ //debug
+    showSignUpError(server_msg.message);
+    //alert("contraseña incorrecta");
+    return false;
   }
 }
 
@@ -140,12 +152,33 @@ function changePassword(){
 
   var npassword = document.forms["changePassForm"]["new_password"].value;
   var cpassword = document.forms["changePassForm"]["current_password"].value;
+  var server_msg = serverstub.changePassword(localStorage.getItem("token"), cpassword, npassword);
 
-  serverstub.changePassword(localStorage.getItem("token"), cpassword, npassword);
+  if(!server_msg.success){
+    showChangePasswordError(server_msg.message);
+    alert(server_msg.message);
+  }
+  else{
+    showChangePasswordSuccess(server_msg.message);
+    alert(server_msg.message);
+  }
 
-  alert("password changed!"); //debug
 
   return false;
+}
+
+function showChangePasswordError(message){
+  document.getElementById("messageChPassword").innerHTML = message;
+  document.getElementById("chPasswordError").style.display = "block";
+
+  document.getElementById("chPasswordSuccess").style.display = "none";
+}
+
+function showChangePasswordSuccess(message){
+  document.getElementById("messageChPasswordS").innerHTML = message;
+  document.getElementById("chPasswordSuccess").style.display = "block";
+
+  document.getElementById("chPasswordError").style.display = "none";
 }
 
 
@@ -277,18 +310,22 @@ function searchUser(){
   var userData;
 
 
-  if (server_msg.success){
-    userData = server_msg.data;
+  if (!server_msg.success){ //debug
+    showSearchError(server_msg.message);
   }else{
-    alert(server_msg.message); //debug
-    return -1; //error
+      userData = server_msg.data;
+      renderUserTab(userData);
+      openTab("browsetab","user");
   }
-
-  renderUserTab(userData);
-  openTab("browsetab","user");
-
   return false;
 }
+
+function showSearchError(message){
+  document.getElementById("messageSearch").innerHTML = message;
+  document.getElementById("searchError").style.display = "block";
+}
+
+
 
 
 function renderUserTab(userData){

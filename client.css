@@ -99,6 +99,14 @@ ul.navbar li a:focus, {
   margin: 2px;
 }
 
+.errorField{
+  background-color: red;
+}
+
+.successField{
+  background-color: green;
+}
+
 
 #loginForm, #signupForm{
   border-style: solid;
