@@ -33,9 +33,8 @@ function logIn(){
 
   var server_msg = serverstub.signIn(email, password);
 
-  if (!server_msg.success){ //debug
+  if (!server_msg.success){
     showLogInError(server_msg.message);
-    //alert("contraseña incorrecta");
     return false;
   }
   else{
@@ -93,9 +92,8 @@ function signUp(){
 
   var server_msg = serverstub.signUp(user);
 
-  if (!server_msg.success){ //debug
+  if (!server_msg.success){
     showSignUpError(server_msg.message);
-    //alert("contraseña incorrecta");
     return false;
   }
 }
@@ -156,11 +154,8 @@ function changePassword(){
 
   if(!server_msg.success){
     showChangePasswordError(server_msg.message);
-    alert(server_msg.message);
-  }
-  else{
+  }else{
     showChangePasswordSuccess(server_msg.message);
-    alert(server_msg.message);
   }
 
 
@@ -310,7 +305,7 @@ function searchUser(){
   var userData;
 
 
-  if (!server_msg.success){ //debug
+  if (!server_msg.success){
     showSearchError(server_msg.message);
   }else{
       userData = server_msg.data;
