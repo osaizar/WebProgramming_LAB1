@@ -52,7 +52,7 @@ function showLogInError(message){
 
 function showSignUpError(message){
   document.getElementById("messageSignUp").innerHTML = message;
-  document.getElementById("logInError").style.display = "block";
+  document.getElementById("signUpError").style.display = "block";
 }
 
 
