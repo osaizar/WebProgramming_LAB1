@@ -2,14 +2,7 @@ body {
   background-color: lightblue;
 }
 
-div{
-  margin: .4em 0;
-}
-
-div label{
-  width: 35%;
-  float: left;
-}
+/* Navbar stuff */
 
 ul.navbar{
   list-style-type: none;
@@ -19,12 +12,6 @@ ul.navbar{
   border: 1px solid #ccc;
   background-color: #f1f1f1;
 }
-
-ul.dataList{
-  list-style-type: none;
-  margin: 5px;
-}
-
 
 ul.navbar li {
   float: left;
@@ -49,6 +36,95 @@ ul.navbar li a:focus, {
   background-color: #ccc;
 }
 
+/* Custom class configurations */
+.errorField{
+  background-color: red;
+}
+
+.successField{
+  background-color: green;
+}
+
+/* Welcome page */
+
+
+.form-row{
+  width: 250px;
+  height: 20px;
+  margin-top: .1em;
+  margin-bottom: .1em;
+  display: inline-block;
+}
+
+
+.form-row label{
+  width: 60%;
+  height: 0;
+  float: left;
+  text-align: left;
+  font-size: 75%;
+  margin-right: .1em;
+}
+
+.form-row input {
+  float: right;
+  font-size: 75%;
+  width: 40%;
+  height: 60%;
+  margin-right: 2em;
+}
+
+.form-row select {
+  float: right;
+  font-size: 75%;
+  width: 45%;
+  height: 15%;
+  margin-right: 2em;
+}
+
+
+.holder{
+  margin: 0 auto;
+  width: 600px;
+  height: 400px;
+}
+
+.rightSide{
+  display: inline-block;
+  float: right;
+  margin-left: 0px;
+  margin-top: 100px;
+  width: 250px;
+  height: 400px;
+}
+
+.leftSide{
+  display: inline-block;
+  float: left;
+  height: 400px;
+  width: 340px;
+  margin-top: 100px;
+  margin-right: 10px;
+}
+
+#signupTitle{
+  margin-top: 0px;
+}
+
+#loginForm, #signupForm{
+  background-color: white;
+}
+
+#loginForm + #signupForm{
+  height: 78%;
+}
+
+#signupForm{
+  margin-top: 10px;
+}
+
+/* Profile page */
+
 
 .tabcontent {
     display: none;
@@ -62,32 +138,6 @@ ul.navbar li a:focus, {
 }
 
 
-.button{
-  position: relative;
-}
-
-.holder{
-  margin: 0 auto;
-  width: 600px;
-  height: 400px;
-}
-
-.rightSide{
-  float: left;
-  margin-left: 10px
-  margin-top: 100px;
-  width: 250px;
-  height: 400px;
-}
-
-.leftSide{
-  float: left;
-  height: 400px;
-  width: 340px;
-  margin-right: 10px;
-  border-width: 1px;
-}
-
 .userData{
   background-color: #73F;
   margin-top: 10px;
@@ -95,21 +145,11 @@ ul.navbar li a:focus, {
   border-width: 1px;
 }
 
+ul.dataList{
+  list-style-type: none;
+  margin: 5px;
+}
+
 .userData h3{
   margin: 2px;
-}
-
-.errorField{
-  background-color: red;
-}
-
-.successField{
-  background-color: green;
-}
-
-
-#loginForm, #signupForm{
-  border-style: solid;
-  border-width: 1px;
-  background-color: white;
 }

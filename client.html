@@ -8,72 +8,75 @@
     <script src="client.js" type="text/javascript"></script>
     <script src="serverstub.js" type="text/javascript"></script>
     <script type="text/view" id="welcomeview">
-        <div class="holder">
-            <div class="leftSide">
-                <img src="wimage.png" />
-            </div>
-
-            <div class="rightSide">
-                <form id="loginForm">
-                    <div>
-                        <label for="email">Email</label>
-                        <input type="email" name="email" required>
-                    </div>
-                    <div>
-                        <label for="password">Password</label>
-                        <input type="password" name="password" required>
-                    </div>
-                    <input id="Login" class="button" type="submit" value="Login">
-                </form>
-
-                <div id="logInError" class="errorField" style="display:none">
-                    <span id="messageLogIn"> <span>
+    <div class="holder">
+        <div class="leftSide">
+            <img src="wimage.png" />
         </div>
 
-        <form id="signupForm">
-          <h2>Sign up here</h2>
-          <div>
-            <label for="name">First name</label>
-            <input type="text" name="name" required>
+        <div class="rightSide">
+            <form id="loginForm">
+                <div class="form-row">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-row">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" required>
+                </div>
+                <div>
+                    <input id="Login" class="button" type="submit" value="Login">
+                </div>
+            </form>
+            <div id="logInError" class="errorField" style="display:none">
+                <span id="messageLogIn"> <span>
           </div>
-          <div>
-            <label for="f-name">Family name</label>
-            <input type="text" name="f-name" required>
+          <form id="signupForm">
+              <h2 id="signupTitle">Sign up here</h2>
+
+              <div class="form-row">
+                  <label for="name">First name</label>
+                  <input type="text" name="name" required>
+              </div>
+              <div class="form-row">
+                  <label for="f-name">Family name</label>
+                  <input type="text" name="f-name" required>
+              </div>
+              <div class="form-row">
+                  <label for="gender">Gender</label>
+                  <select id="gender" form="signupForm">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+            </div>
+            <div class="form-row">
+                  <label for="city">City</label>
+                  <input type="text" name="city" required>
+            </div>
+            <div class="form-row">
+                  <label for="country">Country</label>
+                  <input type="text" name="country" required>
+            </div>
+            <div class="form-row">
+                  <label for="Email">Email</label>
+                  <input type="email" name="email" required>
+            </div>
+            <div class="form-row">
+                  <label for="password">Password</label>
+                  <input id="s_password" type="password" name="password" required pattern=".{6,}" title="6 characters minimum" onchange="checkPasswords()">
+            </div>
+            <div class="form-row">
+                  <label for="Rpassword">Repeat PSW</label>
+                  <input id="s_rpassword" type="password" name="Rpassword" required>
+            </div>
+            <div>
+                <br><input class="button" type="submit" value="Sign Up">
+            </div>
+          </form>
+          <div id = "signUpError" class = "errorField" style = "display:none">
+            <span id = "messageSignUp"> <span>
           </div>
-          <div>
-            <label for="gender">Gender</label>
-            <select id="gender" form="signupForm">
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
-          </div>
-          <div>
-            <label for="city">City</label>
-            <input type="text" name="city" required>
-          </div>
-          <div>
-            <label for="country">Country</label>
-            <input type="text" name="country" required>
-          </div>
-          <div>
-            <label for="Email">Email</label>
-            <input type="email" name="email" required>
-          </div>
-          <div>
-            <label for="password">Password</label>
-            <input id="s_password" type="password" name="password" required pattern=".{6,}" title="6 characters minimum" onchange="checkPasswords()">
-          <div>
-            <label for="Rpassword">Repeat password</label>
-            <input id="s_rpassword" type="password" name="Rpassword" required>
-          </div>
-          <input class="button" type="submit" value="Sign Up">
-        </form>
-        <div id = "signUpError" class = "errorField" style = "display:none">
-          <span id = "messageSignUp"> <span>
         </div>
       </div>
-    </div>
-  </div>
   </script>
   <script type="text/view" id="profileview">
 
