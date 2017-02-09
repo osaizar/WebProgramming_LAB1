@@ -27,9 +27,7 @@
                     <input id="Login" class="button" type="submit" value="Login">
                 </div>
             </form>
-            <div id="logInError" class="errorField" style="display:none">
-                <span id="messageLogIn"> <span>
-          </div>
+
           <form id="signupForm">
               <h2 id="signupTitle">Sign up here</h2>
 
@@ -176,16 +174,16 @@
     <div id="account" class="menu" style="display:none">
       <div class="holder">
         <form id="changePassForm">
-          <div>
-            <label for="current_password">Current Password</label>
+          <div class="form-row">
+            <label for="current_password">Current PSW</label>
             <input type="password" name="current_password" required>
           </div>
-          <div>
-            <label for="new_password">New Password</label>
+          <div class="form-row">
+            <label for="new_password">New PSW</label>
             <input id="s_password" type="password" name="new_password" required pattern=".{6,}" title="6 characters minimum" onchange="checkPasswords()">
           </div>
-          <div>
-            <label for="rnew_password">Repeat New Password</label>
+          <div class="form-row">
+            <label for="rnew_password">Repeat New PSW</label>
             <input id="s_rpassword" type="password" name="rnew_password" required>
           </div>
           <input class="button" type="submit" value="Change Password">

@@ -33,7 +33,7 @@ function logIn() {
     var server_msg = serverstub.signIn(email, password);
 
     if (!server_msg.success) {
-        showLogInError(server_msg.message);
+        showSignUpError(server_msg.message);
     } else {
         localStorage.setItem("token", server_msg.data);
         displayView();
@@ -41,10 +41,6 @@ function logIn() {
     return false;
 }
 
-function showLogInError(message) {
-    document.getElementById("messageLogIn").innerHTML = message;
-    document.getElementById("logInError").style.display = "block";
-}
 
 function showSignUpError(message) {
     document.getElementById("messageSignUp").innerHTML = message;
